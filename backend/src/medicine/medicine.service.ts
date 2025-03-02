@@ -19,7 +19,46 @@ export class MedicinesService {
     return medicine;
   }
 
-  async getAll(): Promise<Medicine[]> {
-    return this.medicineModel.find().select("-details -reviews").exec();
+  async getAll(
+    page = 1,
+    limit = 9,
+    category?: string,
+    keyword?: string
+  ): Promise<{
+    items: Medicine[];
+    totalItems: number;
+    totalPages: number;
+    currentPage: number;
+    limit: number;
+  }> {
+    const perPage = Math.max(1, Math.min(limit, 50));
+    const currentPage = Math.max(1, page);
+
+    const filter: any = {};
+    if (category) {
+      filter.category = category;
+    }
+    if (keyword) {
+      filter.name = { $regex: keyword, $options: "i" };
+    }
+
+    const totalItems = await this.medicineModel.countDocuments(filter);
+
+    const totalPages = Math.ceil(totalItems / perPage);
+
+    const items = await this.medicineModel
+      .find(filter)
+      .select("-details -reviews")
+      .skip((currentPage - 1) * perPage)
+      .limit(perPage)
+      .exec();
+
+    return {
+      items,
+      totalItems,
+      totalPages,
+      currentPage,
+      limit: perPage,
+    };
   }
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from "@nestjs/common";
+import { Controller, Get, Param, Query } from "@nestjs/common";
 import { MedicinesService } from "./medicine.service";
 import { Medicine } from "src/database/schemas/medicine.schema";
 
@@ -7,8 +7,18 @@ export class MedicinesController {
   constructor(private readonly medicinesService: MedicinesService) {}
 
   @Get()
-  async getAll(): Promise<Medicine[]> {
-    return this.medicinesService.getAll();
+  async getAll(
+    @Query("page") page: string,
+    @Query("limit") limit: string,
+    @Query("category") category: string,
+    @Query("keyword") keyword: string
+  ) {
+    return this.medicinesService.getAll(
+      Number(page),
+      Number(limit),
+      category,
+      keyword
+    );
   }
 
   @Get(":id")
