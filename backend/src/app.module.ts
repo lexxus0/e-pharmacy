@@ -5,6 +5,8 @@ import { validateEnvVariable } from "./utils/env.util";
 import { AuthModule } from "./auth/auth.module";
 import { MedicinesModule } from "./medicine/medicine.module";
 import { StoreModule } from "./stores/stores.module";
+import { ReviewsModule } from "./reviews/reviews.module";
+import { CartModule } from "./cart/cart.module";
 
 @Module({
   imports: [
@@ -15,6 +17,8 @@ import { StoreModule } from "./stores/stores.module";
     AuthModule,
     MedicinesModule,
     StoreModule,
+    ReviewsModule,
+    CartModule,
   ],
   controllers: [],
   providers: [],

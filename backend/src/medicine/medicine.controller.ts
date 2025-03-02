@@ -1,16 +1,8 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Param,
-  Body,
-  Put,
-  Delete,
-} from "@nestjs/common";
+import { Controller, Get, Param } from "@nestjs/common";
 import { MedicinesService } from "./medicine.service";
 import { Medicine } from "src/database/schemas/medicine.schema";
 
-@Controller("products")
+@Controller("api/products")
 export class MedicinesController {
   constructor(private readonly medicinesService: MedicinesService) {}
 

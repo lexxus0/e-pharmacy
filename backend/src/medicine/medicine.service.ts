@@ -20,6 +20,6 @@ export class MedicinesService {
   }
 
   async getAll(): Promise<Medicine[]> {
-    return this.medicineModel.find().select("-details").exec();
+    return this.medicineModel.find().select("-details -reviews").exec();
   }
 }

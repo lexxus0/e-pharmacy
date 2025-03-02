@@ -10,7 +10,7 @@ import {
 import { StoreService } from "./stores.service";
 import { Store } from "src/database/schemas/store.schema";
 
-@Controller("stores")
+@Controller("api/stores")
 export class StoreController {
   constructor(private readonly storesService: StoreService) {}
 
