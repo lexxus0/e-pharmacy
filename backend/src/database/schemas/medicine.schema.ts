@@ -32,6 +32,13 @@ export class Medicine extends Document {
     immune_support: string;
     digestive_aid: string;
   };
+
+  @Prop({ required: true, type: Object })
+  reviews: {
+    avatar: string;
+    name: string;
+    testimonial: string;
+  };
 }
 
 export const MedicineSchema = SchemaFactory.createForClass(Medicine);

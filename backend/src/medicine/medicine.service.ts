@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model, Types } from "mongoose";
 import { Medicine } from "src/database/schemas/medicine.schema";
+import { MedicineResponseDto } from "../dto/medicine-response.dto";
 
 @Injectable()
 export class MedicinesService {
@@ -24,13 +25,7 @@ export class MedicinesService {
     limit = 9,
     category?: string,
     keyword?: string
-  ): Promise<{
-    items: Medicine[];
-    totalItems: number;
-    totalPages: number;
-    currentPage: number;
-    limit: number;
-  }> {
+  ): Promise<MedicineResponseDto> {
     const perPage = Math.max(1, Math.min(limit, 50));
     const currentPage = Math.max(1, page);
 

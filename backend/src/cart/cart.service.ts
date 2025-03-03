@@ -69,6 +69,9 @@ export class CartService {
     cart.status = "completed";
     await cart.save();
 
-    return { message: "Order placed.", totalAmount: sum };
+    return {
+      message: "Order placed.",
+      totalAmount: Math.round(sum * 100) / 100,
+    };
   }
 }

@@ -5,9 +5,8 @@ import {
   IsNotEmpty,
   MaxLength,
   Matches,
-  isPhoneNumber,
-} from 'class-validator';
-import { IsValidPhoneNumber } from 'src/decorators/phone.decorator';
+} from "class-validator";
+import { IsValidPhoneNumber } from "src/decorators/phone.decorator";
 
 export class RegisterUserDto {
   @IsString()
@@ -24,7 +23,7 @@ export class RegisterUserDto {
   })
   readonly email: string;
 
-  @IsValidPhoneNumber({ message: 'Please provide a valid phone number.' })
+  @IsValidPhoneNumber({ message: "Please provide a valid phone number." })
   @IsNotEmpty()
   readonly phone: string;
 
