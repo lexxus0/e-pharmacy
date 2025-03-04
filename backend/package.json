@@ -1,13 +1,14 @@
 {
   "name": "e-pharmacy",
   "version": "0.0.1",
+  "type": "module",
   "description": "",
   "author": "Oleksii Ozyrskyi",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
     "start": "nest start",
-    "start:prod": "node --max-old-space-size=512 dist/main",
+    "start:prod": "node --max-old-space-size=1024 dist/main",
     "start:prod:large": "node --max-old-space-size=1024 dist/main",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -37,6 +38,7 @@
     "helmet": "^8.0.0",
     "libphonenumber-js": "^1.12.4",
     "mongoose": "^8.11.0",
+    "node": "^23.9.0",
     "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",

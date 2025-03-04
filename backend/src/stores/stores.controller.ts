@@ -5,6 +5,8 @@ import { ApiOperation, ApiResponse } from "@nestjs/swagger";
 import { StoresDto } from "src/dto/store.dto";
 
 @Controller("api/stores")
+@ApiResponse({ status: 404, description: "Service not found" })
+@ApiResponse({ status: 500, description: "Internal server error" })
 export class StoreController {
   constructor(private readonly storesService: StoreService) {}
 
@@ -15,8 +17,6 @@ export class StoreController {
     type: StoresDto,
     description: "Successfully got stores",
   })
-  @ApiResponse({ status: 404, description: "Service not found" })
-  @ApiResponse({ status: 500, description: "Internal server error" })
   async getStores(): Promise<{
     status: number;
     message: string;
@@ -36,8 +36,6 @@ export class StoreController {
     type: StoresDto,
     description: "Successfully got nearest stores",
   })
-  @ApiResponse({ status: 404, description: "Service not found" })
-  @ApiResponse({ status: 500, description: "Internal server error" })
   async getNearest(): Promise<{
     status: number;
     message: string;

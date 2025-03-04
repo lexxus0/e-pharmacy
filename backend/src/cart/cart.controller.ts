@@ -19,6 +19,9 @@ import { UpdateCartDto } from "src/dto/update-cart.dto";
 
 @Controller("api/cart")
 @UseGuards(JwtAuthGuard)
+@ApiResponse({ status: 401, description: "Unauthorized" })
+@ApiResponse({ status: 404, description: "Service not found" })
+@ApiResponse({ status: 500, description: "Internal server error" })
 @ApiBearerAuth()
 export class CartController {
   constructor(private readonly cartService: CartService) {}
@@ -46,9 +49,6 @@ export class CartController {
       status: "active",
     },
   })
-  @ApiResponse({ status: 401, description: "Unauthorized" })
-  @ApiResponse({ status: 404, description: "Service not found" })
-  @ApiResponse({ status: 500, description: "Internal server error" })
   async getCart(@Req() req) {
     return {
       status: 200,
@@ -80,9 +80,6 @@ export class CartController {
       status: "completed",
     },
   })
-  @ApiResponse({ status: 401, description: "Unauthorized" })
-  @ApiResponse({ status: 404, description: "Service not found" })
-  @ApiResponse({ status: 500, description: "Internal server error" })
   async getHistory(@Req() req) {
     return {
       status: 200,
@@ -115,9 +112,6 @@ export class CartController {
       status: "active",
     },
   })
-  @ApiResponse({ status: 401, description: "Unauthorized" })
-  @ApiResponse({ status: 404, description: "Service not found" })
-  @ApiResponse({ status: 500, description: "Internal server error" })
   async updateCart(@Req() req, @Body() body) {
     return {
       status: 200,
@@ -135,16 +129,11 @@ export class CartController {
     status: 200,
     description: "Successfully checked out",
     example: {
-      schema: {
-        message: "Order placed.",
-        totalAmount: 555.81,
-      },
+      message: "Order placed.",
+      totalAmount: 555.81,
     },
   })
   @ApiOperation({ summary: "Set order to completed and get full price" })
-  @ApiResponse({ status: 401, description: "Unauthorized" })
-  @ApiResponse({ status: 404, description: "Service not found" })
-  @ApiResponse({ status: 500, description: "Internal server error" })
   async checkout(@Req() req) {
     return {
       status: 200,

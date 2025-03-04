@@ -8,6 +8,8 @@ import {
   Req,
   UnauthorizedException,
   Get,
+  Injectable,
+  Scope,
 } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { JwtAuthGuard } from "../guards/auth.guard";
@@ -24,6 +26,7 @@ import { UpdateUserDto } from "src/dto/update-user.dto";
 import { RefreshDto } from "src/dto/refresh.dto";
 
 @ApiTags("Auth")
+@Injectable({ scope: Scope.REQUEST })
 @Controller("api/user")
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -142,7 +145,7 @@ export class AuthController {
   @ApiResponse({ status: 401, description: "Unauthorized" })
   @ApiResponse({ status: 404, description: "User not found" })
   @ApiResponse({ status: 500, description: "Internal server error" })
-  async updateUser(@Body() updateUserDto: UpdateUserDto, @Req() req) {
+  async updateUserInfo(@Body() updateUserDto: UpdateUserDto, @Req() req) {
     const userId = req.user?.userId;
 
     if (!userId) throw new UnauthorizedException("User not authenticated");
@@ -175,7 +178,7 @@ export class AuthController {
   @ApiResponse({ status: 401, description: "Unauthorized" })
   @ApiResponse({ status: 404, description: "User not found" })
   @ApiResponse({ status: 500, description: "Internal server error" })
-  async getUserData(@Req() req: any) {
+  async getUserInfo(@Req() req: any) {
     return {
       status: 200,
       data: await this.authService.getUserData(req.user.userId),
@@ -193,10 +196,7 @@ export class AuthController {
   @ApiResponse({ status: 404, description: "User not found" })
   @ApiResponse({ status: 500, description: "Internal server error" })
   async logout() {
-    return {
-      status: 204,
-      data: this.authService.logoutUser(),
-      message: "Successfully logged out",
-    };
+    await this.authService.logoutUser();
+    return { status: 204, message: "Successfully logged out" };
   }
 }

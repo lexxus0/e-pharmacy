@@ -5,6 +5,8 @@ import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { MedicineResponseDto } from "src/dto/medicine-response.dto";
 import { MedicineByIdResponseDto } from "src/dto/medicine-by-id.dto";
 @ApiTags("Products")
+@ApiResponse({ status: 404, description: "Service not found" })
+@ApiResponse({ status: 500, description: "Internal server error" })
 @Controller("api/products")
 export class MedicinesController {
   constructor(private readonly medicinesService: MedicinesService) {}
@@ -16,8 +18,6 @@ export class MedicinesController {
     type: MedicineResponseDto,
     description: "Successfully received medicine",
   })
-  @ApiResponse({ status: 404, description: "Service not found" })
-  @ApiResponse({ status: 500, description: "Internal server error" })
   async getAll(
     @Query("page") page: string,
     @Query("limit") limit: string,
@@ -43,8 +43,6 @@ export class MedicinesController {
     type: MedicineByIdResponseDto,
     description: "Successfully received medicine by id",
   })
-  @ApiResponse({ status: 404, description: "Service not found" })
-  @ApiResponse({ status: 500, description: "Internal server error" })
   async getById(@Param("id") id: string): Promise<{
     status: number;
     message: string;
