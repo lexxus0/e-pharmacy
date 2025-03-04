@@ -18,7 +18,7 @@ async function bootstrap() {
     .setVersion("1.0")
     .build();
 
-  const PORT = validateEnvVariable(process.env.PORT, "PORT") || 8080;
+  const PORT = Number(validateEnvVariable(process.env.PORT, "PORT")) || 8080;
 
   app.use(cookieParser());
 
