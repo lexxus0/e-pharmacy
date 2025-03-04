@@ -1,6 +1,5 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
-import helmet from "helmet";
 import * as cookieParser from "cookie-parser";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 
@@ -10,6 +9,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle("E-Pharmacy")
     .setDescription("API documentation for E-Pharmacy service")
+    .addBearerAuth()
     .setVersion("1.0")
     .build();
 

@@ -11,7 +11,13 @@ import {
 } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { JwtAuthGuard } from "../guards/auth.guard";
-import { ApiTags, ApiOperation, ApiBody, ApiResponse } from "@nestjs/swagger";
+import {
+  ApiTags,
+  ApiOperation,
+  ApiBody,
+  ApiResponse,
+  ApiBearerAuth,
+} from "@nestjs/swagger";
 import { RegisterUserDto } from "src/dto/register-user.dto";
 import { LoginUserDto } from "src/dto/login-user.dto";
 import { UpdateUserDto } from "src/dto/update-user.dto";
@@ -88,10 +94,11 @@ export class AuthController {
 
   @Post("refresh")
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOperation({ summary: "Refresh access token using refresh token" })
   @ApiBody({ type: RefreshDto })
   @ApiResponse({
-    status: 200,
+    status: 201,
     description: "Successfully refreshed tokens",
     schema: {
       example: {
@@ -115,6 +122,7 @@ export class AuthController {
 
   @Put("update")
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOperation({ summary: "Update user information" })
   @ApiBody({ type: UpdateUserDto })
   @ApiResponse({
@@ -148,6 +156,7 @@ export class AuthController {
 
   @Get("user-info")
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOperation({ summary: "Get current user data" })
   @ApiResponse({
     status: 200,
@@ -176,6 +185,7 @@ export class AuthController {
 
   @Post("logout")
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @HttpCode(204)
   @ApiOperation({ summary: "Logout user" })
   @ApiResponse({ status: 204, description: "Successfully logged out" })
