@@ -2,6 +2,7 @@ import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import * as cookieParser from "cookie-parser";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { validateEnvVariable } from "./utils/env.util";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -9,12 +10,15 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle("E-Pharmacy")
     .setDescription("API documentation for E-Pharmacy service")
-    .addServer("https://e-pharmacy-c3fr.onrender.com")
+    .addServer(
+      validateEnvVariable(process.env.API_URL, "API_URL") ||
+        "http://localhost:8080"
+    )
     .addBearerAuth()
     .setVersion("1.0")
     .build();
 
-  const PORT = process.env.PORT ?? 8080;
+  const PORT = validateEnvVariable(process.env.PORT, "PORT") || 8080;
 
   app.use(cookieParser());
 
