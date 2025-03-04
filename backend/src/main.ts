@@ -9,6 +9,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle("E-Pharmacy")
     .setDescription("API documentation for E-Pharmacy service")
+    .addServer("https://e-pharmacy-c3fr.onrender.com")
     .addBearerAuth()
     .setVersion("1.0")
     .build();
