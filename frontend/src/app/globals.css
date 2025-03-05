@@ -1,7 +1,12 @@
 @import "tailwindcss";
 
+@theme {
+  --breakpoint-xxl: 90rem;
+}
+
 body {
   background-color: #f7f8fa;
+  overflow-x: hidden;
   font-family: "Inter", sans-serif;
   color: #1d1e21;
 }
@@ -33,6 +38,11 @@ h2 {
     padding-left: 32px;
     padding-right: 32px;
   }
+
+  h2 {
+    font-size: 40px;
+    line-height: 120%;
+  }
 }
 
 @media screen and (min-width: 1440px) {
@@ -43,6 +53,11 @@ h2 {
     margin-right: auto;
     padding-left: 100px;
     padding-right: 100px;
+  }
+
+  h2 {
+    font-size: 48px;
+    line-height: 115%;
   }
 }
 

@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import storesReducer from "@/store/stores/slice";
+import reviewsReducer from "@/store/reviews/slice";
 import {
   persistStore,
   persistReducer,
@@ -16,10 +17,15 @@ const storesPersistConfig = {
   key: "stores",
   storage,
 };
+const reviewsPersistConfig = {
+  key: "reviews",
+  storage,
+};
 
 export const store = configureStore({
   reducer: {
     stores: persistReducer(storesPersistConfig, storesReducer),
+    reviews: persistReducer(reviewsPersistConfig, reviewsReducer),
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
