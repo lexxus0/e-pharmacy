@@ -1,7 +1,7 @@
 import AddPharmacyPromo from "@/components/AddPharmacyPromo";
 import Hero from "@/components/Hero";
 import MarqueeSection from "@/components/Marquee";
-import MedicineStores from "@/components/MedicineStores";
+import MedicineNearestStores from "@/components/MedicineNearestStores";
 import PromoBanners from "@/components/PromoBanners";
 import Reviews from "@/components/Reviews";
 
@@ -10,7 +10,7 @@ export default function HomePage() {
     <div>
       <Hero />
       <PromoBanners />
-      <MedicineStores />
+      <MedicineNearestStores />
       <AddPharmacyPromo />
       <MarqueeSection />
       <Reviews />

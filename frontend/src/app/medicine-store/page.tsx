@@ -1,3 +1,5 @@
+import MedicineGeneralStores from "@/components/MedicineGeneralStores";
+
 export default function page() {
-  return <div>PRIVIT</div>;
+  return <MedicineGeneralStores />;
 }

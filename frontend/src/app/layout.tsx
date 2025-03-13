@@ -32,9 +32,7 @@ export default function RootLayout({
             <Header />
           </header>
           <main>{children}</main>
-          <footer>
-            <Footer />
-          </footer>
+          <footer>{/* <Footer /> */}</footer>
         </Providers>
       </body>
     </html>

@@ -2,8 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchReviews } from "./operations";
 import { IReviews } from "@/interfaces/interfaces";
 import { handlePending, handleRejected } from "../init";
-
-export interface ReviewsState {
+interface ReviewsState {
   reviews: IReviews[];
   isLoading: boolean;
   error: string | null;

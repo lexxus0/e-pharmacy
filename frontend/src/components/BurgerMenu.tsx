@@ -9,8 +9,8 @@ import Image from "next/image";
 export default function BurgerMenu({ isOpen, onClose }: IModalProps) {
   const links = [
     { href: "/home", label: "Home" },
-    { href: "/notices", label: "Medicine store" },
-    { href: "/friends", label: "Medicine" },
+    { href: "/medicine-store", label: "Medicine store" },
+    { href: "/medicine", label: "Medicine" },
   ];
   return (
     <>

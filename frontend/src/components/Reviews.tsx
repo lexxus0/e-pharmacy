@@ -12,6 +12,7 @@ import { Autoplay } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
+import Loader from "./Loader";
 
 export default function Reviews() {
   const dispatch = useAppDispatch();
@@ -26,7 +27,7 @@ export default function Reviews() {
   const reviews = useAppSelector(selectReviews);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   return (

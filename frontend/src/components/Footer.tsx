@@ -5,7 +5,7 @@ import { AiFillInstagram, AiFillYoutube } from "react-icons/ai";
 
 export default function Footer() {
   return (
-    <section className="green text-[#f7f8fa]">
+    <section className="green text-[#f7f8fa] mt-5">
       <div className="container py-5 md:py-8">
         <div className="md:flex">
           <div className="md:flex md:flex-col  md:w-[400px]">
