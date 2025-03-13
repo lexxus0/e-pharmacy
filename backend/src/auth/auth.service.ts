@@ -55,9 +55,15 @@ export class AuthService {
       password: hashedPassword,
     });
 
+    const tokens = this.generateTokens(newUser);
+
     const userData = { ...newUser.toObject() };
     delete userData.password;
-    return userData;
+
+    return {
+      user: userData,
+      token: tokens.accessToken,
+    };
   }
 
   /**

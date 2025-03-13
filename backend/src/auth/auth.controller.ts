@@ -39,12 +39,16 @@ export class AuthController {
     description: "Successfully registered",
     schema: {
       example: {
-        _id: "67c4d524275bc5d350c95172",
-        name: "Dmytro",
-        email: "dmytro@gmail.com",
-        phone: "++380123231231",
-        createdAt: "2025-03-02T22:01:08.711Z",
-        updatedAt: "2025-03-02T22:01:08.711Z",
+        user: {
+          _id: "67c4d524275bc5d350c95172",
+          name: "Dmytro",
+          email: "dmytro@gmail.com",
+          phone: "++380123231231",
+          createdAt: "2025-03-02T22:01:08.711Z",
+          updatedAt: "2025-03-02T22:01:08.711Z",
+        },
+        token:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFvenlyc2t5aUBnbWFpbC5jb20iLCJ1c2VySWQiOiI2N2MxZDgzZjQ5MTcxNmIwZmJlOWI3Y2IiLCJpYXQiOjE3NDA5NTI4MDIsImV4cCI6MTc0MDk1MzcwMn0.PmYOmdWrkjlKm6u7yH3XhKS2V84hlAS1Fk97pvA1Xzw",
       },
     },
   })
