@@ -23,11 +23,7 @@ async function bootstrap() {
   app.use(cookieParser());
 
   app.enableCors({
-    origin: [
-      validateEnvVariable(process.env.VERCEL_URL, "VERCEL_URL") ||
-        "https://e-pharmacy-eta.vercel.app",
-      "https://e-pharmacy-c3fr.onrender.com",
-    ],
+    origin: "*",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     allowedHeaders: "Content-Type, Authorization",
     credentials: true,
