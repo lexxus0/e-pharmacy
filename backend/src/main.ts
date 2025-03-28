@@ -23,7 +23,7 @@ async function bootstrap() {
   app.use(cookieParser());
 
   app.enableCors({
-    origin: "http://localhost:3000",
+    origin: validateEnvVariable(process.env.VERCEL_URL, "VERCEL_URL"),
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     allowedHeaders: "Content-Type, Authorization",
     credentials: true,
