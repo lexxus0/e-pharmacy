@@ -63,6 +63,7 @@ export class AuthService {
     return {
       user: userData,
       token: tokens.accessToken,
+      refreshToken: tokens.refreshToken,
     };
   }
 
@@ -174,7 +175,7 @@ export class AuthService {
         process.env.JWT_ACCESS_SECRET,
         "JWT_ACCESS_SECRET"
       ),
-      expiresIn: "15m",
+      expiresIn: "3d",
     });
 
     const refreshToken = this.jwtService.sign(jwtPayload, {

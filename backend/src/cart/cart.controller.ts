@@ -57,37 +57,6 @@ export class CartController {
     };
   }
 
-  @Get("history")
-  @ApiOperation({ summary: "Get cart history(successful payments)" })
-  @ApiResponse({
-    status: 200,
-    description: "Successfully got cart history",
-    example: {
-      _id: "67c5f575e5dfd287869e8560",
-      userId: "67c4d524275bc5d350c95172",
-      items: [
-        {
-          medicineId: "67c3479b9167ae929133edb3",
-          quantity: 2,
-          _id: "67c5f575e5dfd287869e8561",
-        },
-        {
-          medicineId: "67c3479b9167ae929133edb1",
-          quantity: 5,
-          _id: "67c5f581e5dfd287869e8565",
-        },
-      ],
-      status: "completed",
-    },
-  })
-  async getHistory(@Req() req) {
-    return {
-      status: 200,
-      data: await this.cartService.getHistory(req.user.userId),
-      message: "Successfully got cart history",
-    };
-  }
-
   @Put("update")
   @ApiOperation({ summary: "Update cart" })
   @ApiBody({ type: UpdateCartDto })

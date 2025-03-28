@@ -23,14 +23,6 @@ export class CartService {
     };
   }
 
-  async getHistory(userId: string): Promise<Cart[]> {
-    const carts = await this.cartModel.find({ userId, status: "completed" });
-    if (carts.length === 0) {
-      throw new NotFoundException("You haven't any completed orders yet.");
-    }
-    return carts;
-  }
-
   async updateCart(userId: string, medicineId: string, quantity: number) {
     let cart = await this.cartModel.findOne({ userId, status: "active" });
 
@@ -66,7 +58,6 @@ export class CartService {
       sum += medicine.price * item.quantity;
     }
 
-    cart.status = "completed";
     await cart.save();
 
     return {
