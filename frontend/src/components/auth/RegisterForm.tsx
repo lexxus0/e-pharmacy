@@ -11,7 +11,6 @@ export default function RegisterForm() {
   const initialValues = { name: "", email: "", phone: "", password: "" };
 
   const handleSubmit = (values: typeof initialValues) => {
-    console.log(values);
     dispatch(registerUser(values));
   };
 

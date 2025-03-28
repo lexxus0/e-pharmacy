@@ -3,8 +3,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const instance = axios.create({
-  baseURL: "https://e-pharmacy-c3fr.onrender.com/api",
-  withCredentials: true,
+  baseURL: "https://e-pharmacy-qxi2.onrender.com/api",
 });
 
 export const setAuthHeader = (token: string) => {

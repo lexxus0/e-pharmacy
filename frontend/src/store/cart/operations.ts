@@ -26,7 +26,6 @@ export const updateCart = createAsyncThunk<
 >("cart/updateCart", async ({ medicineId, quantity }, thunkAPI) => {
   const state = thunkAPI.getState();
   const accessToken = state.auth.token;
-  console.log(accessToken);
 
   if (!accessToken) console.error("No token found.");
   try {
@@ -35,7 +34,6 @@ export const updateCart = createAsyncThunk<
       medicineId,
       quantity,
     });
-    console.log(res.data.data.items);
     return res.data.data.items;
   } catch (e) {
     return thunkAPI.rejectWithValue(handleError(e, "Failed to update cart"));
@@ -53,7 +51,6 @@ export const checkout = createAsyncThunk<
   try {
     setAuthHeader(accessToken);
     const res = await instance.post("/cart/checkout");
-    console.log(res.data.data);
     return res.data.data;
   } catch (e) {
     return thunkAPI.rejectWithValue(handleError(e, "Failed to ckeckout"));

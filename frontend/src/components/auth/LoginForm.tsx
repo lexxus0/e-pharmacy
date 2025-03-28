@@ -13,7 +13,6 @@ export default function LoginForm() {
   const initialValues = { email: "", password: "" };
 
   const handleSubmit = (values: typeof initialValues) => {
-    console.log(values);
     dispatch(loginUser(values));
     router.push("/home");
   };

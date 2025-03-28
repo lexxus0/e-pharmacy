@@ -9,7 +9,6 @@ export const registerUser = createAsyncThunk<IUserResponse, IUser>(
   async (credentials, { rejectWithValue }) => {
     try {
       const res = await instance.post("user/register", credentials);
-      console.log(res.data);
       setAuthHeader(res.data.token);
       return res.data;
     } catch (e) {
@@ -49,7 +48,6 @@ export const refreshUser = createAsyncThunk<
     const res = await instance.post("user/refresh", {
       refreshToken: persistedToken,
     });
-    console.log(res.data);
     return res.data.data;
   } catch (e) {
     return thunkAPI.rejectWithValue(handleError(e, "Failed to refresh user."));
