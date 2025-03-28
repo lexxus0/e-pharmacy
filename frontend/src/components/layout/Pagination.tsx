@@ -23,7 +23,7 @@ export default function Pagination({
 
   const handlePageChange = (page: number) => {
     onPageChange(page);
-    window.scrollTo({ top: 120, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const pages: number[] = [];

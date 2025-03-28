@@ -1,22 +1,34 @@
+"use client";
+
 import Image from "next/image";
-import logo from "../public/Layout/logo.svg";
+import whiteLogo from "@/public/Layout/whitelogo.png";
+
 import { TiSocialFacebook } from "react-icons/ti";
 import { AiFillInstagram, AiFillYoutube } from "react-icons/ai";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
+  const pathname = usePathname();
+  const isAuthPage =
+    pathname.includes("/register") || pathname.includes("/login");
   return (
-    <section className="green text-[#f7f8fa] mt-5">
+    <section
+      className={`green text-[#f7f8fa] mt-5 ${isAuthPage ? "hidden" : ""}`}
+    >
       <div className="container py-5 md:py-8">
         <div className="md:flex">
           <div className="md:flex md:flex-col  md:w-[400px]">
             <div className="flex items-center gap-3 text-white mb-5">
-              <Image
-                src={logo}
-                alt="Website logo"
-                width={32}
-                height={32}
-                className="text-transparent cursor-pointer"
-              />
+              <Link href="/home">
+                <Image
+                  src={whiteLogo}
+                  alt="Website logo"
+                  width={32}
+                  height={32}
+                  className="text-transparent cursor-pointer"
+                />
+              </Link>
               <p className="font-semibold text-base md:text-xl">E-Pharmacy</p>
             </div>
             <p className="text-sm pr-14 mb-10">
@@ -27,9 +39,15 @@ export default function Footer() {
           <div className="md:flex md:flex-col xxl:pl-20 xxl:flex-row xxl:justify-end xxl:gap-[300px]">
             <nav className="pb-20 md:pb-8">
               <ul className="flex gap-8 text-sm font-semibold md:text-base">
-                <li className="cursor-pointer">Home</li>
-                <li className="cursor-pointer">Medicine Store</li>
-                <li className="cursor-pointer">Medicine</li>
+                <li className="cursor-pointer">
+                  <Link href="/home">Home</Link>
+                </li>
+                <li className="cursor-pointer">
+                  <Link href="/medicine-store">Medicine Store</Link>
+                </li>
+                <li className="cursor-pointer">
+                  <Link href="/medicine">Medicine</Link>
+                </li>
               </ul>
             </nav>
             <ul className="hidden md:flex md:gap-3 ml-auto">

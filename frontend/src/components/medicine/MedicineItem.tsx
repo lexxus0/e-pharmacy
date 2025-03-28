@@ -1,12 +1,28 @@
 import { IMedicine } from "@/interfaces/interfaces";
+import { updateCart } from "@/store/cart/operations";
+import { useAppDispatch, useAppSelector } from "@/store/stores/hooks";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { selectIsLoggedIn } from "@/store/auth/selectors";
+import AuthModal from "../auth/AuthModal";
 
 interface MedicineItemProps {
   item: IMedicine;
 }
 
 export default function MedicineItem({ item }: MedicineItemProps) {
+  const dispatch = useAppDispatch();
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClick = () => setIsOpen(!isOpen);
+
+  const handleAddClick = (id: string) => {
+    dispatch(updateCart({ medicineId: id, quantity: 1 }));
+  };
+
   return (
     <li>
       <Image
@@ -33,17 +49,21 @@ export default function MedicineItem({ item }: MedicineItemProps) {
         <div className="flex justify-between items-center">
           <button
             type="button"
+            onClick={() =>
+              isLoggedIn ? handleAddClick(item._id) : handleClick()
+            }
             className="green text-white py-2.5 px-3 leading-[140%] rounded-3xl font-medium text-sm"
           >
             Add to cart
           </button>
           <Link
-            href="/medicine-store"
+            href={`/medicine/${item._id}`}
             className="underline text-xs text-[#1d1e21]"
           >
             Details
           </Link>
         </div>
+        <AuthModal isOpen={isOpen} onClose={handleClick} />
       </div>
     </li>
   );

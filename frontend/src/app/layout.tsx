@@ -1,8 +1,13 @@
-import Header from "@/components/Header";
+"use client";
+
+import Header from "@/components/layout/Header";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { Providers } from "@/store/provider";
-import Footer from "@/components/Footer";
+import Footer from "@/components/layout/Footer";
+import { useEffect } from "react";
+import { refreshUser } from "@/store/auth/operations";
+import { useAppDispatch } from "@/store/stores/hooks";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,15 +31,28 @@ export default function RootLayout({
           referrerPolicy="no-referrer"
         />
       </head>
-      <body className={`${inter.className}  relative`}>
+      <body className={`${inter.className} relative`}>
         <Providers>
+          <ReduxInitializer />
           <header>
             <Header />
           </header>
           <main>{children}</main>
-          <footer>{/* <Footer /> */}</footer>
+          <footer>
+            <Footer />
+          </footer>
         </Providers>
       </body>
     </html>
   );
+}
+
+function ReduxInitializer() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
+  return null;
 }

@@ -1,6 +1,7 @@
-import mobImg from "@/public/home/medicinepromo.png";
-import tabImg from "@/public/home/tabmedicinepromo.png";
+import mobImg from "@/public/home/medicinepromo.webp";
+import tabImg from "@/public/home/tabmedicinepromo.webp";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function AddPharmacyPromo() {
   return (
@@ -15,12 +16,12 @@ export default function AddPharmacyPromo() {
             by connecting with your community pharmacy through our online
             platform.
           </p>
-          <button
-            type="button"
-            className="rounded-[60px] border-[rgba(241,241,241,0.5)] border px-8 py-3 text-sm font-medium bg-inherit mb-10 md:px-[50px] md:leading-[125%] inline xxl:w-[190px] xxl:px-10"
+          <Link
+            href="/medicine"
+            className="rounded-[60px] border-[rgba(241,241,241,0.5)] border px-8 py-3 text-sm font-medium bg-inherit mb-10 md:px-[50px] md:leading-[125%] inline xxl:w-[190px] xxl:px-12"
           >
             Buy medicine
-          </button>
+          </Link>
         </div>
         <picture>
           <source srcSet={tabImg.src} media="(min-width: 768px)" />

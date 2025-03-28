@@ -1,11 +1,18 @@
-import MedicineList from "@/components/MedicineList";
-import React from "react";
+"use client";
 
-export default function page() {
+import Filters from "@/components/navigation/Filters";
+import MedicineList from "@/components/medicine/MedicineList";
+import { Suspense } from "react";
+import Loader from "@/components/layout/Loader";
+
+export default function MedicinePage() {
   return (
-    <div className="container">
+    <div className="container mt-4 ">
       <h2 className="!text-left mb-10">Medicine</h2>
-      <MedicineList />
+      <Filters />
+      <Suspense fallback={<Loader />}>
+        <MedicineList />
+      </Suspense>
     </div>
   );
 }

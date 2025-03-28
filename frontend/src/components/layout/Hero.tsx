@@ -1,5 +1,5 @@
 import Image from "next/image";
-import pills from "@/public/pills.png";
+import pills from "@/public/pills.webp";
 
 export default function Hero() {
   return (

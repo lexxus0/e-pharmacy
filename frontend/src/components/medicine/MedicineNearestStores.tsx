@@ -5,7 +5,7 @@ import { fetchNearestStores } from "@/store/stores/operations";
 import { selectNearestStores } from "@/store/stores/selectors";
 import { useEffect, useState } from "react";
 import MedicineStoresList from "./MedicineStoresList";
-import Loader from "./Loader";
+import Loader from "../layout/Loader";
 
 export default function MedicineNearestStores() {
   const dispatch = useAppDispatch();

@@ -8,7 +8,7 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
-const PopUp: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -59,4 +59,4 @@ const PopUp: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   );
 };
 
-export default PopUp;
+export default Modal;

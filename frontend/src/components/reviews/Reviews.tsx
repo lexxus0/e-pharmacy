@@ -12,7 +12,7 @@ import { Autoplay } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
-import Loader from "./Loader";
+import Loader from "../layout/Loader";
 
 export default function Reviews() {
   const dispatch = useAppDispatch();
@@ -43,7 +43,7 @@ export default function Reviews() {
         slidesPerView={1}
         autoplay={{ delay: 2500, disableOnInteraction: false }}
         loop={true}
-        loopAdditionalSlides={6}
+        loopAdditionalSlides={3}
         className="pb-10"
         breakpoints={{
           768: {

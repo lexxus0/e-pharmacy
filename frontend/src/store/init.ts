@@ -4,6 +4,7 @@ import axios from "axios";
 
 export const instance = axios.create({
   baseURL: "https://e-pharmacy-c3fr.onrender.com/api",
+  withCredentials: true,
 });
 
 export const setAuthHeader = (token: string) => {

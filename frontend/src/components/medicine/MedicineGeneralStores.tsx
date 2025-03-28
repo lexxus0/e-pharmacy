@@ -5,7 +5,7 @@ import { fetchGeneralStores } from "@/store/stores/operations";
 import { selectGeneralStores } from "@/store/stores/selectors";
 import { useEffect, useState } from "react";
 import MedicineStoresList from "./MedicineStoresList";
-import Loader from "./Loader";
+import Loader from "../layout/Loader";
 
 export default function MedicineGeneralStores() {
   const dispatch = useAppDispatch();
@@ -22,7 +22,9 @@ export default function MedicineGeneralStores() {
     <section className="container mb-20 md:mb-30">
       <h2 className="!text-left mb-10 md:mb-8 xxl:mb-10">Medicine store</h2>
       {isLoading ? (
-        <Loader />
+        <div className="min-h-screen flex justify-center items-center">
+          <Loader />
+        </div>
       ) : (
         <MedicineStoresList stores={stores} location="page" />
       )}

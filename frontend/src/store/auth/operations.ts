@@ -1,56 +1,60 @@
 import { clearAuthHeader, instance, setAuthHeader } from "../init";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { handleError } from "../init";
-import { IUser } from "@/interfaces/interfaces";
+import { IUser, IUserResponse } from "@/interfaces/interfaces";
 import { RootState } from "../store";
 
-export const registerUser = createAsyncThunk<
-  IUser,
-  { name: string; email: string; phone: string; password: string }
->("users/signup", async (credentials, { rejectWithValue }) => {
-  try {
-    const res = await instance.post("user/register", credentials);
-    setAuthHeader(res.data.token);
-    return res.data;
-  } catch (e) {
-    return rejectWithValue(handleError(e, "Failed to register."));
-  }
-});
-
-export const loginUser = createAsyncThunk<
-  IUser,
-  { email: string; password: string }
->("users/signin", async (credentials, { rejectWithValue }) => {
-  try {
-    const res = await instance.post("user/login", credentials);
-    setAuthHeader(res.data.token);
-    return res.data;
-  } catch (e) {
-    return rejectWithValue(handleError(e, "Failed to login."));
-  }
-});
-
-export const refreshUser = createAsyncThunk<IUser, void, { state: RootState }>(
-  "users/refresh",
-  async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const persistedToken = state.auth.token;
-
-    if (!persistedToken) {
-      return thunkAPI.rejectWithValue("No token found.");
-    }
-
+export const registerUser = createAsyncThunk<IUserResponse, IUser>(
+  "users/signup",
+  async (credentials, { rejectWithValue }) => {
     try {
-      setAuthHeader(persistedToken);
-      const res = await instance.post("user/refresh");
+      const res = await instance.post("user/register", credentials);
+      console.log(res.data);
+      setAuthHeader(res.data.token);
       return res.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(
-        handleError(e, "Failed to refresh user.")
-      );
+      return rejectWithValue(handleError(e, "Failed to register."));
     }
   }
 );
+
+export const loginUser = createAsyncThunk<IUserResponse, Partial<IUser>>(
+  "users/signin",
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const res = await instance.post("user/login", credentials);
+      setAuthHeader(res.data.data.token);
+      return res.data.data;
+    } catch (e) {
+      return rejectWithValue(handleError(e, "Failed to login."));
+    }
+  }
+);
+
+export const refreshUser = createAsyncThunk<
+  { accessToken: string; refreshToken: string },
+  void,
+  { state: RootState }
+>("users/refresh", async (_, thunkAPI) => {
+  const state = thunkAPI.getState();
+  const accessToken = state.auth.token;
+  const persistedToken = state.auth.refreshToken;
+
+  if (!accessToken) {
+    return thunkAPI.rejectWithValue("No token found.");
+  }
+
+  try {
+    setAuthHeader(accessToken);
+    const res = await instance.post("user/refresh", {
+      refreshToken: persistedToken,
+    });
+    console.log(res.data);
+    return res.data.data;
+  } catch (e) {
+    return thunkAPI.rejectWithValue(handleError(e, "Failed to refresh user."));
+  }
+});
 
 export const getUserData = createAsyncThunk<IUser, void, { state: RootState }>(
   "auth/getData",
@@ -83,10 +87,8 @@ export const updateUserData = createAsyncThunk<
   if (!token) return rejectWithValue("User is not authenticated.");
 
   try {
-    const response = await instance.put("/user/update", data, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
+    setAuthHeader(token);
+    const response = await instance.put("/user/update", data);
     return response.data;
   } catch (e) {
     return rejectWithValue(
@@ -95,15 +97,18 @@ export const updateUserData = createAsyncThunk<
   }
 });
 
-export const signoutUser = createAsyncThunk(
+export const signoutUser = createAsyncThunk<void, void, { state: RootState }>(
   "users/signout",
-  async (_, thunkAPI) => {
-    clearAuthHeader();
+  async (_, { getState, rejectWithValue }) => {
+    const token = getState().auth.token;
+    if (!token) return rejectWithValue("User is not authenticated.");
 
     try {
+      setAuthHeader(token);
       await instance.post("user/logout");
+      clearAuthHeader();
     } catch (e) {
-      return thunkAPI.rejectWithValue(handleError(e, "Failed to signout."));
+      return rejectWithValue(handleError(e, "Failed to signout."));
     }
   }
 );

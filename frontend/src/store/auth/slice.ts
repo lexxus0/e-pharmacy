@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { IUser } from "@/interfaces/interfaces";
 import {
   registerUser,
@@ -8,11 +8,10 @@ import {
   getUserData,
   signoutUser,
 } from "./operations";
-import { handleRejected } from "../init";
-
 interface AuthState {
   user: IUser | null;
   token: string | null;
+  refreshToken: string | null;
   isLoggedIn: boolean;
   isRefreshing: boolean;
   error: string | null;
@@ -21,6 +20,7 @@ interface AuthState {
 const initialState: AuthState = {
   user: null,
   token: null,
+  refreshToken: null,
   isLoggedIn: false,
   isRefreshing: false,
   error: null,
@@ -33,11 +33,7 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.fulfilled, (state, action) => {
-        state.user = {
-          name: action.payload.name,
-          email: action.payload.email,
-          phone: action.payload.phone,
-        };
+        state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
       })
@@ -45,12 +41,9 @@ const authSlice = createSlice({
         state.error = action.payload as string;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        state.user = {
-          name: action.payload.name,
-          email: action.payload.email,
-          phone: action.payload.phone,
-        };
+        state.user = action.payload.user;
         state.token = action.payload.token;
+        state.refreshToken = action.payload.refreshToken ?? null;
         state.isLoggedIn = true;
       })
       .addCase(loginUser.rejected, (state, action) => {
@@ -60,28 +53,21 @@ const authSlice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
-        state.user = {
-          name: action.payload.name,
-          email: action.payload.email,
-          phone: action.payload.phone,
-        };
-        state.token = action.payload.token;
+        state.token = action.payload.accessToken;
+        state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
       .addCase(refreshUser.rejected, (state, action) => {
         state.isRefreshing = false;
+        state.isLoggedIn = false;
         state.error = action.payload as string;
       })
       .addCase(getUserData.pending, (state) => {
         state.isRefreshing = true;
       })
       .addCase(getUserData.fulfilled, (state, action) => {
-        state.user = {
-          name: action.payload.name,
-          email: action.payload.email,
-          phone: action.payload.phone,
-        };
+        state.user = action.payload;
         state.isRefreshing = false;
       })
       .addCase(getUserData.rejected, (state, action) => {
@@ -89,11 +75,7 @@ const authSlice = createSlice({
         state.error = action.payload as string;
       })
       .addCase(updateUserData.fulfilled, (state, action) => {
-        state.user = {
-          name: action.payload.name,
-          email: action.payload.email,
-          phone: action.payload.phone,
-        };
+        state.user = action.payload;
       })
       .addCase(updateUserData.rejected, (state, action) => {
         state.error = action.payload as string;
@@ -109,4 +91,4 @@ const authSlice = createSlice({
   },
 });
 
-export const authReducer = authSlice.reducer;
+export default authSlice.reducer;

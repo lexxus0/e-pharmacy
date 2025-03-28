@@ -4,18 +4,23 @@ import { IMedicineItem, IMedicineResponse } from "@/interfaces/interfaces";
 
 export const fetchMedicine = createAsyncThunk<
   IMedicineResponse,
-  { limit: number; currentPage: number },
+  { limit: number; currentPage: number; category?: string; keyword?: string },
   { rejectValue: string }
->("products/fetchAll", async ({ limit, currentPage }, ThunkAPI) => {
-  try {
-    const res = await instance.get("/products", {
-      params: { limit, page: currentPage },
-    });
-    return res.data.data;
-  } catch (e) {
-    return ThunkAPI.rejectWithValue(handleError(e, "Failed to fetch medicine"));
+>(
+  "products/fetchAll",
+  async ({ limit, currentPage, category, keyword }, ThunkAPI) => {
+    try {
+      const res = await instance.get("/products", {
+        params: { limit, page: currentPage, category, keyword },
+      });
+      return res.data.data;
+    } catch (e) {
+      return ThunkAPI.rejectWithValue(
+        handleError(e, "Failed to fetch medicine")
+      );
+    }
   }
-});
+);
 
 export const fetchMedicineById = createAsyncThunk<
   IMedicineItem,

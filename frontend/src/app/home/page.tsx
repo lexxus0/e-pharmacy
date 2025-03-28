@@ -1,9 +1,11 @@
-import AddPharmacyPromo from "@/components/AddPharmacyPromo";
-import Hero from "@/components/Hero";
-import MarqueeSection from "@/components/Marquee";
-import MedicineNearestStores from "@/components/MedicineNearestStores";
-import PromoBanners from "@/components/PromoBanners";
-import Reviews from "@/components/Reviews";
+"use client";
+
+import AddPharmacyPromo from "@/components/promo/AddPharmacyPromo";
+import Hero from "@/components/layout/Hero";
+import MarqueeSection from "@/components/promo/Marquee";
+import PromoBanners from "@/components/promo/PromoBanners";
+import MedicineNearestStores from "@/components/medicine/MedicineNearestStores";
+import Reviews from "@/components/reviews/Reviews";
 
 export default function HomePage() {
   return (

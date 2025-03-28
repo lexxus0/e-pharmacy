@@ -24,8 +24,9 @@ export interface IReviews {
   name: string;
   avatar: string;
   testimonial: string;
+  score: number;
+  date: string;
 }
-
 export enum StoreType {
   General = "general",
   Nearest = "nearest",
@@ -51,6 +52,7 @@ export interface IMedicine {
   suppliers: string;
   price: number;
   stock: number;
+  category: string;
 }
 
 export interface IMedicineItem {
@@ -60,7 +62,7 @@ export interface IMedicineItem {
   suppliers: string;
   price: number;
   stock: number;
-  details: IDetails[];
+  details: IDetails;
   reviews: IReviews[];
 }
 
@@ -76,7 +78,31 @@ export interface IDetails {
 }
 
 export interface IUser {
-  name: string;
+  name?: string;
   email: string;
-  phone: string;
+  phone?: string;
+  password?: string;
+}
+
+export interface IUserResponse {
+  user: IUser;
+  token: string;
+  refreshToken?: string;
+}
+
+export interface ICart {
+  medicineId: IMedicine;
+  quantity: number;
+  _id: string;
+}
+
+export interface ICartResponse {
+  _id: string;
+  items: ICart[];
+  status: CartStatus;
+}
+
+export enum CartStatus {
+  Open = "open",
+  Close = "close",
 }
