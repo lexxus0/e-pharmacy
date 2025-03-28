@@ -27,7 +27,7 @@ export class CartController {
   constructor(private readonly cartService: CartService) {}
 
   @Get()
-  @ApiOperation({ summary: "Get active cart of user's items" })
+  @ApiOperation({ summary: "Get cart of user's items" })
   @ApiResponse({
     status: 200,
     description: "Successfully got cart",
