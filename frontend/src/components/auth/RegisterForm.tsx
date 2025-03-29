@@ -2,13 +2,19 @@
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { registerValidationSchema } from "@/validation/authSchemas";
-import { useAppDispatch } from "@/store/stores/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/stores/hooks";
 import { registerUser } from "@/store/auth/operations";
 import Link from "next/link";
+import { selectIsLoggedIn } from "@/store/auth/selectors";
+import { redirect } from "next/navigation";
 
 export default function RegisterForm() {
   const dispatch = useAppDispatch();
   const initialValues = { name: "", email: "", phone: "", password: "" };
+
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+
+  if (isLoggedIn) redirect("/");
 
   const handleSubmit = (values: typeof initialValues) => {
     dispatch(registerUser(values));

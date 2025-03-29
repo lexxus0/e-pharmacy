@@ -16,16 +16,16 @@ export default function BurgerMenu({ isOpen, onClose }: IModalProps) {
   const dispatch = useAppDispatch();
 
   const links = [
-    { href: "/home", label: "Home", styles: "px-4 h-[38px]" },
+    { href: "/", label: "Home", styles: "px-4 h-[32px] !my-0.75" },
     {
       href: "/medicine-store",
       label: "Medicine store",
-      styles: "px-[6px] h-[38px]",
+      styles: "px-[6px] h-[32px] !my-1",
     },
     {
       href: "/medicine",
       label: "Medicine",
-      styles: "px-4 h-[40px]",
+      styles: "px-4 h-[34px] !my-1",
     },
   ];
   return (
@@ -60,7 +60,7 @@ export default function BurgerMenu({ isOpen, onClose }: IModalProps) {
                       <button
                         className={`text-[#93939a] text-sm md:text-base lg:text-lg transition-all duration-300 ease-in-out py-2  ${
                           isActive
-                            ? `green rounded-3xl text-white ${styles}`
+                            ? `green rounded-3xl  text-white ${styles}`
                             : ""
                         }`}
                       >
@@ -75,7 +75,7 @@ export default function BurgerMenu({ isOpen, onClose }: IModalProps) {
         </nav>
         <div className="mt-auto pb-10">
           {!isLoggedIn ? (
-            <AuthLinks />
+            <AuthLinks location={true} />
           ) : (
             <div className="flex justify-center text-white">
               <button

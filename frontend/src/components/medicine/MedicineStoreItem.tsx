@@ -12,6 +12,12 @@ export default function MedicineStoreItem({
   store,
   location,
 }: MedicineStoreItemProps) {
+  const handleOpenMaps = () => {
+    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+      store.address
+    )}`;
+    window.open(mapsUrl, "_blank");
+  };
   return (
     <li
       key={store._id}
@@ -55,7 +61,9 @@ export default function MedicineStoreItem({
           location === "page" ? "md:inline" : ""
         }`}
       >
-        <button>Visit Store</button>
+        <button type="button" onClick={handleOpenMaps}>
+          Visit Store
+        </button>
       </div>
       <div
         className={`absolute right-[-89px] bottom-[-35px] ${

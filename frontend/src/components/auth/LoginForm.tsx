@@ -2,19 +2,20 @@
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { loginValidationSchema } from "@/validation/authSchemas";
-import { useAppDispatch } from "@/store/stores/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/stores/hooks";
 import { loginUser } from "@/store/auth/operations";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
+import { selectIsLoggedIn } from "@/store/auth/selectors";
 
 export default function LoginForm() {
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  if (isLoggedIn) redirect("/");
   const dispatch = useAppDispatch();
-  const router = useRouter();
   const initialValues = { email: "", password: "" };
 
   const handleSubmit = (values: typeof initialValues) => {
     dispatch(loginUser(values));
-    router.push("/home");
   };
 
   return (

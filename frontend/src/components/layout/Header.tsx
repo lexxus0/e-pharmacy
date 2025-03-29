@@ -4,26 +4,36 @@ import Image from "next/image";
 import homeLogo from "@/public/Layout/whitelogo.png";
 import logo from "@/public/Layout/logo.svg";
 import headernav from "@/public/Layout/headernav.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import AuthLinks from "../auth/AuthLinks";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useAppSelector } from "@/store/stores/hooks";
-import { selectIsLoggedIn } from "@/store/auth/selectors";
 import AuthHeader from "../auth/AuthHeader";
 import BurgerMenu from "../navigation/BurgerMenu";
+import { useAppSelector } from "@/store/stores/hooks";
+import { selectIsLoggedIn } from "@/store/auth/selectors";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
+
   const pathname = usePathname();
 
-  const isHomePage = pathname === "/home";
+  const isHomePage = pathname === "/";
   const isStoresPage = pathname === "/medicine-store";
 
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (isLoggedIn && !isClient) {
+    return null;
+  }
+
   const navLinks = [
-    { name: "Home", href: "/home", styles: "!ml-[-17.25px] py-1.5 !px-4" },
+    { name: "Home", href: "/", styles: "!ml-[-17.25px] py-1.5 !px-4" },
     {
       name: "Medicine store",
       href: "/medicine-store",
@@ -47,7 +57,7 @@ export default function Header() {
       }`}
     >
       <div className="flex items-center gap-3 xxl:mr-[100px]">
-        <Link href="/home">
+        <Link href="/">
           <Image
             src={isHomePage ? homeLogo : logo}
             alt="Website logo"

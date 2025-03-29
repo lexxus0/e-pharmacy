@@ -14,13 +14,15 @@ export default function Footer() {
     pathname.includes("/register") || pathname.includes("/login");
   return (
     <section
-      className={`green text-[#f7f8fa] mt-5 ${isAuthPage ? "hidden" : ""}`}
+      className={`green text-[#f7f8fa] mt-5 relative bottom-0 left-0 right-0 ${
+        isAuthPage ? "hidden" : ""
+      }`}
     >
       <div className="container py-5 md:py-8">
         <div className="md:flex">
           <div className="md:flex md:flex-col  md:w-[400px]">
             <div className="flex items-center gap-3 text-white mb-5">
-              <Link href="/home">
+              <Link href="/">
                 <Image
                   src={whiteLogo}
                   alt="Website logo"
@@ -40,7 +42,7 @@ export default function Footer() {
             <nav className="pb-20 md:pb-8">
               <ul className="flex gap-8 text-sm font-semibold md:text-base">
                 <li className="cursor-pointer">
-                  <Link href="/home">Home</Link>
+                  <Link href="/">Home</Link>
                 </li>
                 <li className="cursor-pointer">
                   <Link href="/medicine-store">Medicine Store</Link>

@@ -1,14 +1,16 @@
 "use client";
 
 import { ICart } from "@/interfaces/interfaces";
+import { checkout, updateCart } from "@/store/cart/operations";
 import { selectCartItems } from "@/store/cart/selectors";
-import { useAppSelector } from "@/store/stores/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/stores/hooks";
 import { cartValidationSchema } from "@/validation/cartSchemas";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 
 export default function CartForm() {
   const [picked, setPicked] = useState("cashOnDelivery");
+  const dispatch = useAppDispatch();
   const cart = useAppSelector(selectCartItems);
 
   const [total, setTotal] = useState(0);
@@ -43,6 +45,7 @@ export default function CartForm() {
         validationSchema={cartValidationSchema}
         onSubmit={(values) => {
           console.log(values);
+          dispatch(checkout(values));
         }}
       >
         {() => (
@@ -187,7 +190,7 @@ export default function CartForm() {
 
             <div className="bg-[#e7f1ed] flex justify-between items-center px-4.5 py-3.5 rounded-[8px] font-semibold text-base my-5 md:text-lg">
               <p>Total:</p>
-              <p>৳ {total}</p>
+              <p>৳ {total.toFixed(2)}</p>
             </div>
 
             <div>

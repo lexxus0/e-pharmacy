@@ -2,15 +2,30 @@
 
 import { ICart } from "@/interfaces/interfaces";
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import img from "@/public/pills.webp";
+import { useAppDispatch } from "@/store/stores/hooks";
+import { deleteItemFromCart, updateCart } from "@/store/cart/operations";
+import { debounce } from "lodash";
 
 interface ICartItemProps {
   item: ICart;
 }
 
 export default function CartItem({ item }: ICartItemProps) {
+  const dispatch = useAppDispatch();
   const [count, setCount] = useState(item.quantity);
+
+  const debouncedUpdateCart = useRef(
+    debounce((itemId, newCount) => {
+      dispatch(updateCart({ medicineId: itemId, quantity: newCount }));
+    }, 2250)
+  ).current;
+
+  const handleQuantityChange = (newCount: number) => {
+    setCount(newCount);
+    debouncedUpdateCart(item.medicineId._id, newCount);
+  };
 
   return (
     <div className="flex relative cartForm justify-center gap-3 py-8 md:gap-5 md:justify-start">
@@ -40,7 +55,7 @@ export default function CartItem({ item }: ICartItemProps) {
           <div className="flex items-center gap-4 border border-[rgba(29,30,33,0.1)]  rounded-[60px] w-[95px] h-8 md:w-[108px] md:h-11 md:p-1.5">
             <button
               type="button"
-              onClick={() => setCount(count + 1)}
+              onClick={() => handleQuantityChange(count + 1)}
               className="text-lg font-bold px-2 py-1 text-green-400"
             >
               +
@@ -48,7 +63,7 @@ export default function CartItem({ item }: ICartItemProps) {
             <span className="text-base text-[#1d1e21] max-w-1.5">{count}</span>
             <button
               type="button"
-              onClick={() => setCount(count > 1 ? count - 1 : 1)}
+              onClick={() => handleQuantityChange(count > 1 ? count - 1 : 1)}
               className="text-lg font-bold px-2 py-1 text-green-400"
             >
               -
@@ -56,6 +71,9 @@ export default function CartItem({ item }: ICartItemProps) {
           </div>
           <button
             type="button"
+            onClick={() =>
+              dispatch(deleteItemFromCart({ itemId: item.medicineId._id }))
+            }
             className="rounded-[40px] h-8 bg-[rgba(232,80,80,0.1)] font-medium text-sm text-[#e85050] px-3.5 mt-2  md:py-2 md:px-3"
           >
             Remove
