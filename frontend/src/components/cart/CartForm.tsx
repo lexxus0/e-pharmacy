@@ -1,7 +1,7 @@
 "use client";
 
 import { ICart } from "@/interfaces/interfaces";
-import { checkout, updateCart } from "@/store/cart/operations";
+import { checkout } from "@/store/cart/operations";
 import { selectCartItems } from "@/store/cart/selectors";
 import { useAppDispatch, useAppSelector } from "@/store/stores/hooks";
 import { cartValidationSchema } from "@/validation/cartSchemas";
