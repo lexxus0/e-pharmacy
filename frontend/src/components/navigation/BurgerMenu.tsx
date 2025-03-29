@@ -37,7 +37,11 @@ export default function BurgerMenu({ isOpen, onClose }: IModalProps) {
           isOpen ? "translate-x-0" : "translate-x-full"
         } transition-transform duration-300 ease-in-out`}
       >
-        <button className="absolute top-4 right-4" onClick={onClose}>
+        <button
+          className="absolute top-4 right-4"
+          onClick={onClose}
+          aria-label="Close menu on button click"
+        >
           <IoClose className="text-white text-2xl cursor-pointer" />
         </button>
 

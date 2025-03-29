@@ -6,12 +6,14 @@ import { useAppDispatch, useAppSelector } from "@/store/stores/hooks";
 import { loginUser } from "@/store/auth/operations";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { selectIsLoggedIn } from "@/store/auth/selectors";
+import { selectIsLoggedIn, selectError } from "@/store/auth/selectors";
 
 export default function LoginForm() {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
   if (isLoggedIn) redirect("/");
   const dispatch = useAppDispatch();
+  const error = useAppSelector(selectError);
+
   const initialValues = { email: "", password: "" };
 
   const handleSubmit = (values: typeof initialValues) => {
@@ -47,6 +49,9 @@ export default function LoginForm() {
               />
               <ErrorMessage className="error" name="password" component="div" />
             </div>
+            {error?.includes("401") && (
+              <p className="error">Email or password is incorrect</p>
+            )}
           </div>
           <div className="md:w-[323px]">
             <button

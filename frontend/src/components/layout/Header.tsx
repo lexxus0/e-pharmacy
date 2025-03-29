@@ -56,7 +56,7 @@ export default function Header() {
           : "mt-[25px] md:mt-7 mb-[62px]"
       }`}
     >
-      <div className="flex items-center gap-3 xxl:mr-[100px]">
+      <div className="flex items-center gap-3 xxl:mr-10">
         <Link href="/">
           <Image
             src={isHomePage ? homeLogo : logo}

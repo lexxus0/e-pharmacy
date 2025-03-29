@@ -5,7 +5,7 @@ import { registerValidationSchema } from "@/validation/authSchemas";
 import { useAppDispatch, useAppSelector } from "@/store/stores/hooks";
 import { registerUser } from "@/store/auth/operations";
 import Link from "next/link";
-import { selectIsLoggedIn } from "@/store/auth/selectors";
+import { selectError, selectIsLoggedIn } from "@/store/auth/selectors";
 import { redirect } from "next/navigation";
 
 export default function RegisterForm() {
@@ -13,6 +13,8 @@ export default function RegisterForm() {
   const initialValues = { name: "", email: "", phone: "", password: "" };
 
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
+
+  const error = useAppSelector(selectError);
 
   if (isLoggedIn) redirect("/");
 
@@ -69,6 +71,7 @@ export default function RegisterForm() {
               />
               <ErrorMessage className="error" name="password" component="div" />
             </div>
+            {error?.includes("409") && <p className="error">Email in use</p>}
           </div>
           <div className="md:w-[280px]">
             <button

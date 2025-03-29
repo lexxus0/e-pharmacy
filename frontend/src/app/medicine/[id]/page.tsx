@@ -13,6 +13,15 @@ import { updateCart } from "@/store/cart/operations";
 import { selectIsLoggedIn } from "@/store/auth/selectors";
 import AuthModal from "@/components/auth/AuthModal";
 
+const metadata = ({ params }: { params: { id: string } }) => {
+  const item = fetchMedicineById({ _id: params.id });
+  return {
+    title: `${item.name} — E-Pharmacy`,
+    description: `${item.name} — available at E-Pharmacy. Price, features, and delivery.`,
+    keywords: `medicines, ${item.name}, online pharmacy`,
+  };
+};
+
 export default function MedicineDetail() {
   const { id } = useParams();
   const dispatch = useAppDispatch();
