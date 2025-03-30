@@ -18,7 +18,7 @@ export default function NotFoundPage() {
       <p className="text-3xl mt-4">Page not found</p>
       <Link
         href="/"
-        className="mt-6 px-6 py-2 bg-pink-400 rounded-3xl text-[#F0F0F0]"
+        className="mt-6 px-6 py-2 bg-pink-400 rounded-3xl text-white"
       >
         To home page
       </Link>

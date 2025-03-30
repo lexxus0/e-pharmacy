@@ -13,7 +13,7 @@ export default function AuthLinks({ location }: AuthLinksProps) {
         href="/register"
         className={`rounded-[60px] border px-8 py-3 bg-inherit ${
           isHomePage || location
-            ? "border-[rgba(241,241,241,0.5)] text-[#F0F0F0]"
+            ? "border-[rgba(241,241,241,0.5)] text-white"
             : "text-black border-black"
         }`}
       >
@@ -22,7 +22,7 @@ export default function AuthLinks({ location }: AuthLinksProps) {
       <a
         href="/login"
         className={`underline ${
-          !isHomePage ? (location ? "text-[#F0F0F0]" : "text-black") : ""
+          !isHomePage ? (location ? "text-white" : "text-black") : ""
         }`}
       >
         Login

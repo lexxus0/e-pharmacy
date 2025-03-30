@@ -86,7 +86,6 @@ export const deleteItemFromCart = createAsyncThunk<
   try {
     setAuthHeader(accessToken);
     await instance.delete(`/cart/${userId}/item/${itemId}`);
-    console.log(itemId);
     return { itemId };
   } catch (e) {
     return thunkAPI.rejectWithValue(handleError(e, "Failed to delete item"));

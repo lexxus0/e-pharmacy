@@ -47,7 +47,7 @@ export default function BurgerMenu({ isOpen, onClose }: IModalProps) {
           onClick={onClose}
           aria-label="Close menu on button click"
         >
-          <IoClose className="text-[#F0F0F0] text-2xl cursor-pointer" />
+          <IoClose className="text-white text-2xl cursor-pointer" />
         </button>
 
         <nav className="absolute top-[42%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
@@ -70,7 +70,7 @@ export default function BurgerMenu({ isOpen, onClose }: IModalProps) {
                       className={`block 
                         text-[#93939a] text-sm md:text-base transition-all duration-300 ease-in-out py-2  ${
                           isActive
-                            ? `green rounded-3xl  text-[#F0F0F0] ${styles}`
+                            ? `green rounded-3xl  text-white ${styles}`
                             : `${href === "/medicine-store" && "md:!mt-[-5px]"}`
                         }`}
                     >
@@ -86,7 +86,7 @@ export default function BurgerMenu({ isOpen, onClose }: IModalProps) {
           {!isLoggedIn ? (
             <AuthLinks location={true} />
           ) : (
-            <div className="flex justify-center text-[#F0F0F0]">
+            <div className="flex justify-center text-white">
               <button
                 onClick={() => dispatch(signoutUser())}
                 className="rounded-[60px] border-[rgba(241,241,241,0.5)] border px-8 py-3 bg-inherit"

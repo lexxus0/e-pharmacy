@@ -8,6 +8,7 @@ import { useMediaQuery } from "react-responsive";
 import { useState, useEffect } from "react";
 import { signoutUser } from "@/store/auth/operations";
 import { clearCart } from "@/store/cart/slice";
+import { toast } from "sonner";
 
 export default function AuthHeader() {
   const pathname = usePathname();
@@ -23,6 +24,7 @@ export default function AuthHeader() {
 
   const onSignout = () => {
     dispatch(signoutUser());
+    toast.success("Successfully signed out.");
     dispatch(clearCart());
   };
 
@@ -63,7 +65,7 @@ export default function AuthHeader() {
         <button
           className={`border rounded-[60px] h-11 text-sm px-8 ${
             isHomePage
-              ? "border-white text-[#F0F0F0]"
+              ? "border-white text-white"
               : "text-[#59b17a] border-[rgba(89,177,122,0.5)] "
           }`}
           type="button"

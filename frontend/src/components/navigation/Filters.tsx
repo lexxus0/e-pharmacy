@@ -101,7 +101,7 @@ export default function Filters() {
       />
       <button
         onClick={handleApplyFilters}
-        className="flex w-[116px] items-center gap-2 green rounded-[60px] text-[#F0F0F0] font-medium text-sm py-3 px-6.5"
+        className="flex w-[116px] items-center gap-2 green rounded-[60px] text-white font-medium text-sm py-3 px-6.5"
       >
         <BiFilterAlt />
         Filter

@@ -68,7 +68,7 @@ export default function Header() {
         </Link>
         <p
           className={`font-semibold text-base md:text-xl ${
-            isHomePage ? "text-[#F0F0F0]" : "text-black"
+            isHomePage ? "text-white" : "text-black"
           }`}
         >
           E-Pharmacy
@@ -89,7 +89,7 @@ export default function Header() {
                     href={link.href}
                     className={`text-sm rounded-3xl cursor-pointer ${
                       isActive
-                        ? `text-[#F0F0F0] green ${link.styles}`
+                        ? `text-white green ${link.styles}`
                         : `text-black ${link.unactive}`
                     }`}
                   >
@@ -113,7 +113,7 @@ export default function Header() {
         height={26}
         onClick={() => setIsOpen(!isOpen)}
         className={`xxl:hidden cursor-pointer
-          ${isHomePage ? "text-[#F0F0F0]" : "text-black"}
+          ${isHomePage ? "text-white" : "text-black"}
           `}
       />
 

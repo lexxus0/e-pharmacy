@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/store/stores/hooks";
 import { cartValidationSchema } from "@/validation/cartSchemas";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 export default function CartForm() {
   const [picked, setPicked] = useState("cashOnDelivery");
@@ -43,9 +44,12 @@ export default function CartForm() {
           paymentMethod: "cashOnDelivery",
         }}
         validationSchema={cartValidationSchema}
-        onSubmit={(values) => {
-          console.log(values);
+        onSubmit={(values, { resetForm }) => {
           dispatch(checkout(values));
+          toast.message("Cart has been submitted", {
+            description: "We'll contact you via email.",
+          });
+          resetForm();
         }}
       >
         {() => (
@@ -196,7 +200,7 @@ export default function CartForm() {
             <div>
               <button
                 type="submit"
-                className="green rounded-[60px] text-[#F0F0F0] px-8 py-3"
+                className="green rounded-[60px] text-white px-8 py-3"
               >
                 Place order
               </button>

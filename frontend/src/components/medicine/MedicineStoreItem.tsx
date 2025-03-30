@@ -57,7 +57,7 @@ export default function MedicineStoreItem({
         </p>
       </div>
       <div
-        className={`hidden rounded-3xl green px-4 py-2.5 text-[#F0F0F0] ${
+        className={`hidden rounded-3xl green px-4 py-2.5 text-white ${
           location === "page" ? "md:inline" : ""
         }`}
       >
