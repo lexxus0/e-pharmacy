@@ -6,6 +6,8 @@ import {
   Body,
   Req,
   UseGuards,
+  Param,
+  Delete,
 } from "@nestjs/common";
 import { CartService } from "./cart.service";
 import { JwtAuthGuard } from "src/guards/auth.guard";
@@ -93,21 +95,22 @@ export class CartController {
     };
   }
 
-  @Post("checkout")
-  @ApiResponse({
-    status: 200,
-    description: "Successfully checked out",
-    example: {
-      message: "Order placed.",
-      totalAmount: 555.81,
-    },
-  })
-  @ApiOperation({ summary: "Set order to completed and get full price" })
-  async checkout(@Req() req) {
-    return {
-      status: 200,
-      data: await this.cartService.checkout(req.user.userId),
-      message: "Successfully checked out",
-    };
+  @Post("checkout/:userId")
+  async checkout(
+    @Param("userId") userId: string,
+    @Body("name") name: string,
+    @Body("email") email: string,
+    @Body("phone") phone: string,
+    @Body("address") address: string
+  ) {
+    return await this.cartService.checkout(userId, name, email, phone, address);
+  }
+
+  @Delete(":userId/item/:itemId")
+  async removeItem(
+    @Param("userId") userId: string,
+    @Param("itemId") itemId: string
+  ) {
+    return await this.cartService.removeItem(userId, itemId);
   }
 }
