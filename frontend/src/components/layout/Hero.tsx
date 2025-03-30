@@ -15,11 +15,9 @@ export default function Hero() {
           src={pills}
           alt="Decorative pills image"
           priority
-          quality={70}
           className="absolute top-[-8%] z-0 md:w-[460px] md:top-[-45%] md:left-[15%] xxl:w-[540px] xxl:left-[5%] xxl:top-[-65%]"
-          width={320}
-          height={320}
-          sizes="(max-width: 768px) 310px, (max-width: 1024px) 460px, 540px"
+          width={310}
+          height={312}
         />
       </div>
     </section>

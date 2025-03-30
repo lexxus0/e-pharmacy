@@ -61,7 +61,7 @@ export default function Pagination({
           onClick={() => handlePageChange(page)}
           className={`rounded-full border border-gray-300  text-sm !mr-1 w-7 h-7 text-center font-bold ${
             page === currentPage
-              ? "bg-yellow-500 text-white"
+              ? "bg-yellow-500 text-[#F0F0F0]"
               : "bg-white text-black"
           }
           `}

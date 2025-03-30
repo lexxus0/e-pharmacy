@@ -53,7 +53,6 @@ export default function RootLayout({
           content="Your trusted online pharmacy for fast medicine delivery."
         />
         <meta property="og:type" content="website" />
-        <link rel="preload" href="/pills.webp" as="image" type="image/webp" />
         <link
           rel="preload"
           as="style"

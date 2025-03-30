@@ -200,7 +200,7 @@ export default function CartForm() {
             <div>
               <button
                 type="submit"
-                className="green rounded-[60px] text-white px-8 py-3"
+                className="green rounded-[60px] text-[#F0F0F0] px-8 py-3"
               >
                 Place order
               </button>

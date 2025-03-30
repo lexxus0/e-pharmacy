@@ -52,7 +52,7 @@ export default function MedicineItem({ item }: MedicineItemProps) {
             onClick={() =>
               isLoggedIn ? handleAddClick(item._id) : handleClick()
             }
-            className="green text-white py-2.5 px-3 leading-[140%] rounded-3xl font-medium text-sm"
+            className="green text-[#F0F0F0] py-2.5 px-3 leading-[140%] rounded-3xl font-medium text-sm"
           >
             Add to cart
           </button>
