@@ -27,7 +27,11 @@ export default function Reviews() {
   const reviews = useAppSelector(selectReviews);
 
   if (isLoading) {
-    return <Loader />;
+    return (
+      <div className="mb-30">
+        <Loader />
+      </div>
+    );
   }
 
   return (

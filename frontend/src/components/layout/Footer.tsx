@@ -21,7 +21,7 @@ export default function Footer() {
       <div className="container py-5 md:py-8">
         <div className="md:flex">
           <div className="md:flex md:flex-col  md:w-[400px]">
-            <div className="flex items-center gap-3 text-white mb-5">
+            <div className="flex items-center gap-3 text-[#F0F0F0] mb-5">
               <Link href="/">
                 <Image
                   src={whiteLogo}

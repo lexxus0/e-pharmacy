@@ -63,7 +63,7 @@ export default function AuthHeader() {
         <button
           className={`border rounded-[60px] h-11 text-sm px-8 ${
             isHomePage
-              ? "border-white text-white"
+              ? "border-white text-[#F0F0F0]"
               : "text-[#59b17a] border-[rgba(89,177,122,0.5)] "
           }`}
           type="button"

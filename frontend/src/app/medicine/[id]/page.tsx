@@ -13,15 +13,6 @@ import { updateCart } from "@/store/cart/operations";
 import { selectIsLoggedIn } from "@/store/auth/selectors";
 import AuthModal from "@/components/auth/AuthModal";
 
-const metadata = ({ params }: { params: { id: string } }) => {
-  const item = fetchMedicineById({ _id: params.id });
-  return {
-    title: `${item.name} — E-Pharmacy`,
-    description: `${item.name} — available at E-Pharmacy. Price, features, and delivery.`,
-    keywords: `medicines, ${item.name}, online pharmacy`,
-  };
-};
-
 export default function MedicineDetail() {
   const { id } = useParams();
   const dispatch = useAppDispatch();
@@ -104,7 +95,7 @@ export default function MedicineDetail() {
                     onClick={() =>
                       isLoggedIn ? handleAddClick(item._id) : handleClick()
                     }
-                    className="green text-white py-2.5 px-3 leading-[140%] rounded-3xl font-medium text-sm h-11 md:px-6"
+                    className="green text-[#F0F0F0] py-2.5 px-3 leading-[140%] rounded-3xl font-medium text-sm h-11 md:px-6"
                   >
                     Add to cart
                   </button>
@@ -117,7 +108,7 @@ export default function MedicineDetail() {
               <button
                 onClick={() => setActivePage("description")}
                 className={`bg-[rgba(89,177,122,0.1)] rounded-[40px] px-3.5 py-2 text-[#59b17a] md:font-medium ${
-                  activePage === "description" ? "green text-white" : ""
+                  activePage === "description" ? "green text-[#F0F0F0]" : ""
                 }`}
               >
                 Description
@@ -125,7 +116,7 @@ export default function MedicineDetail() {
               <button
                 onClick={() => setActivePage("reviews")}
                 className={`bg-[rgba(89,177,122,0.1)] rounded-[40px] px-3.5 py-2 text-[#59b17a] md:font-medium  
-                  ${activePage === "reviews" ? "green text-white" : ""}
+                  ${activePage === "reviews" ? "green text-[#F0F0F0]" : ""}
                   `}
               >
                 Reviews

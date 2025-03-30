@@ -77,7 +77,7 @@ export default function RegisterForm() {
             <button
               disabled={Object.keys(errors).length !== 0}
               type="submit"
-              className="green rounded-[60px] py-3 flex justify-center items-center h-11 w-full text-white"
+              className="green rounded-[60px] py-3 flex justify-center items-center h-11 w-full text-[#F0F0F0]"
             >
               Register
             </button>

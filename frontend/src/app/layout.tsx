@@ -8,6 +8,15 @@ import Footer from "@/components/layout/Footer";
 import { useEffect } from "react";
 import { refreshUser } from "@/store/auth/operations";
 import { useAppDispatch } from "@/store/stores/hooks";
+import type { Metadata } from "next";
+
+const metadata: Metadata = {
+  title: {
+    default: "E-Pharmacy - Online Medicine Store",
+    template: "%s | E-Pharmacy",
+  },
+  description: "Your trusted online pharmacy for fast medicine delivery.",
+};
 
 const inter = Inter({
   subsets: ["latin"],

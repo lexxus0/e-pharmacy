@@ -16,16 +16,21 @@ export default function BurgerMenu({ isOpen, onClose }: IModalProps) {
   const dispatch = useAppDispatch();
 
   const links = [
-    { href: "/", label: "Home", styles: "px-4 h-[32px] !my-0.75" },
+    {
+      href: "/",
+      label: "Home",
+      styles: "ml-7.5 w-20    h-[32px] !my-0.75 md:!py-1 ",
+    },
     {
       href: "/medicine-store",
       label: "Medicine store",
-      styles: "px-[6px] h-[32px] !my-1",
+      styles:
+        "px-[0px] w-30 ml-3 h-[32px] !my-0.5 !py-1.5 md:h-7 md:!py-0.5 md:!my-[-1px]",
     },
     {
       href: "/medicine",
       label: "Medicine",
-      styles: "px-4 h-[34px] !my-1",
+      styles: "px-4 w-24 ml-6 !pb-1 h-[34px] md:!my-[-2px] md:!py-1 md:h-7.5",
     },
   ];
   return (
@@ -42,7 +47,7 @@ export default function BurgerMenu({ isOpen, onClose }: IModalProps) {
           onClick={onClose}
           aria-label="Close menu on button click"
         >
-          <IoClose className="text-white text-2xl cursor-pointer" />
+          <IoClose className="text-[#F0F0F0] text-2xl cursor-pointer" />
         </button>
 
         <nav className="absolute top-[42%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
@@ -60,16 +65,16 @@ export default function BurgerMenu({ isOpen, onClose }: IModalProps) {
                   (pathname.endsWith(href) && href !== "/");
                 return (
                   <li key={href} className="w-full">
-                    <a href={href} className="block w-full">
-                      <button
-                        className={`text-[#93939a] text-sm md:text-base lg:text-lg transition-all duration-300 ease-in-out py-2  ${
+                    <a
+                      href={href}
+                      className={`block 
+                        text-[#93939a] text-sm md:text-base transition-all duration-300 ease-in-out py-2  ${
                           isActive
-                            ? `green rounded-3xl  text-white ${styles}`
-                            : ""
+                            ? `green rounded-3xl  text-[#F0F0F0] ${styles}`
+                            : `${href === "/medicine-store" && "md:!mt-[-5px]"}`
                         }`}
-                      >
-                        {label}
-                      </button>
+                    >
+                      {label}
                     </a>
                   </li>
                 );
@@ -81,7 +86,7 @@ export default function BurgerMenu({ isOpen, onClose }: IModalProps) {
           {!isLoggedIn ? (
             <AuthLinks location={true} />
           ) : (
-            <div className="flex justify-center text-white">
+            <div className="flex justify-center text-[#F0F0F0]">
               <button
                 onClick={() => dispatch(signoutUser())}
                 className="rounded-[60px] border-[rgba(241,241,241,0.5)] border px-8 py-3 bg-inherit"

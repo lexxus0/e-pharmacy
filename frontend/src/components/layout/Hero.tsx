@@ -3,7 +3,7 @@ import pills from "@/public/pills.webp";
 
 export default function Hero() {
   return (
-    <section className="min-h-screen min-w-screen green text-white mb-10 flex items-center justify-center md:mb-16">
+    <section className="min-h-screen min-w-screen green text-[#F0F0F0] mb-10 flex items-center justify-center md:mb-16">
       <div className="container relative text-left xxl:!max-w-[750px] xxl:!p-0">
         <h1 className="font-semibold text-5xl mb-5 z-20 relative md:pl-5 md:pr-20 md:text-7xl xxl:px-auto xxl:flex xxl:items-center xxl:justify-center xxl:pr-[100px]">
           Your medication delivered
@@ -16,6 +16,7 @@ export default function Hero() {
           alt="Decorative pills image"
           className="absolute top-[-8%] z-0 md:w-[460px] md:top-[-45%] md:left-[15%] xxl:w-[540px] xxl:left-[5%] xxl:top-[-65%]"
           width={310}
+          priority
           height={312}
         />
       </div>
