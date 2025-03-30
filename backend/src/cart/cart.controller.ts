@@ -18,6 +18,7 @@ import {
   ApiResponse,
 } from "@nestjs/swagger";
 import { UpdateCartDto } from "src/dto/update-cart.dto";
+import { checkoutCartDto } from "src/dto/checkout-cart.dto";
 
 @Controller("api/cart")
 @UseGuards(JwtAuthGuard)
@@ -96,6 +97,14 @@ export class CartController {
   }
 
   @Post("checkout/:userId")
+  @ApiOperation({ summary: "Checkout user's cart" })
+  @ApiBody({ type: checkoutCartDto })
+  @ApiResponse({
+    status: 200,
+    description: "Successfully checked out",
+  })
+  @ApiResponse({ status: 404, description: "User not found" })
+  @ApiResponse({ status: 500, description: "Internal server error" })
   async checkout(
     @Param("userId") userId: string,
     @Body("name") name: string,
@@ -107,6 +116,17 @@ export class CartController {
   }
 
   @Delete(":userId/item/:itemId")
+  @ApiOperation({ summary: "Remove an item from the user's cart" })
+  @ApiResponse({
+    status: 200,
+    example: {
+      _id: {
+        _id: "67c5f575e5dfd287869e8560",
+      },
+    },
+  })
+  @ApiResponse({ status: 404, description: "Item not found in cart" })
+  @ApiResponse({ status: 500, description: "Internal server error" })
   async removeItem(
     @Param("userId") userId: string,
     @Param("itemId") itemId: string
