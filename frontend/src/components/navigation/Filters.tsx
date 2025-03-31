@@ -3,7 +3,7 @@
 import { fetchMedicine } from "@/store/medicine/operations";
 import { useAppDispatch } from "@/store/stores/hooks";
 import { BiFilterAlt } from "react-icons/bi";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select, { StylesConfig } from "react-select";
 
 const customStyles: StylesConfig<{ value: string; label: string }> = {
@@ -98,6 +98,7 @@ export default function Filters() {
         value={keyword}
         className="input !w-[335px] md:!w-[224px]"
         onChange={(e) => setKeyword(e.target.value)}
+        suppressHydrationWarning
       />
       <button
         onClick={handleApplyFilters}

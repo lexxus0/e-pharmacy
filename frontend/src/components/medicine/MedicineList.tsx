@@ -44,25 +44,19 @@ export default function MedicineList() {
 
   return (
     <>
-      {isLoading ? (
-        <div className="flex justify-center items-center min-h-screen">
-          <Loader />
-        </div>
-      ) : (
-        <div>
-          <ul className="flex flex-col gap-5 mb-10 md:flex-row md:flex-wrap md:gap-3 xxl:gap-10">
-            {medicine.map((item: IMedicine) => (
-              <MedicineItem item={item} key={item._id} />
-            ))}
-          </ul>
+      <div>
+        <ul className="flex flex-col gap-5 mb-10 md:flex-row md:flex-wrap md:gap-3 xxl:gap-10">
+          {medicine.map((item: IMedicine) => (
+            <MedicineItem item={item} key={item._id} />
+          ))}
+        </ul>
 
-          <Pagination
-            currentPage={currPage}
-            totalPages={totalPages}
-            onPageChange={setCurrPage}
-          />
-        </div>
-      )}
+        <Pagination
+          currentPage={currPage}
+          totalPages={totalPages}
+          onPageChange={setCurrPage}
+        />
+      </div>
     </>
   );
 }

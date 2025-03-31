@@ -2,17 +2,25 @@
 
 import Filters from "@/components/navigation/Filters";
 import MedicineList from "@/components/medicine/MedicineList";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Loader from "@/components/layout/Loader";
 
 export default function MedicinePage() {
-  return (
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+  return isClient ? (
     <div className="container mt-4 ">
-      <h2 className="!text-left mb-10">Medicine</h2>
-      <Filters />
-      <Suspense fallback={<Loader />}>
+      <div>
+        <h2 className="!text-left mb-10">Medicine</h2>
+        <Filters />
         <MedicineList />
-      </Suspense>
+      </div>
+    </div>
+  ) : (
+    <div className="min-h-screen flex justify-center items-center">
+      <Loader />
     </div>
   );
 }

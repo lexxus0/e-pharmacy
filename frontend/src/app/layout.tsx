@@ -10,10 +10,7 @@ import { useAppDispatch } from "@/store/stores/hooks";
 import type { Metadata } from "next";
 import { Toaster } from "sonner";
 import dynamic from "next/dynamic";
-
-const Header = dynamic(() => import("../components/layout/Header"), {
-  ssr: false,
-});
+import Header from "../components/layout/Header";
 
 const metadata: Metadata = {
   title: {
@@ -75,7 +72,7 @@ export default function RootLayout({
         <Providers>
           <ReduxInitializer />
           <Toaster position="bottom-right" />
-          <header className="h-20 absolute left-0 right-0">
+          <header>
             <Header />
           </header>
           <main className="flex-grow">{children}</main>

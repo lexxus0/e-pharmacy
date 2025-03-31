@@ -28,8 +28,8 @@ export default function Header() {
     setIsClient(true);
   }, []);
 
-  if (isLoggedIn && !isClient) {
-    return null;
+  if (!isClient) {
+    return <div className={` ${!isHomePage ? "h-[130px]" : ""}`} />;
   }
 
   const navLinks = [
