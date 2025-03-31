@@ -75,7 +75,7 @@ export default function RootLayout({
         <Providers>
           <ReduxInitializer />
           <Toaster position="bottom-right" />
-          <header>
+          <header className="h-20 absolute left-0 right-0">
             <Header />
           </header>
           <main className="flex-grow">{children}</main>
