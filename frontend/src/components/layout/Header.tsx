@@ -33,24 +33,29 @@ export default function Header() {
   }
 
   const navLinks = [
-    { name: "Home", href: "/", styles: "!ml-[-17.25px] py-1.5 !px-4" },
+    {
+      name: "Home",
+      href: "/",
+      styles: "!ml-[-14.25px] py-1.5 !px-4",
+      unactive: `${isHomePage ? "ml-[-12px] " : ""}`,
+    },
     {
       name: "Medicine store",
       href: "/medicine-store",
       styles: `${isHomePage ? "" : "ml-[-5px] px-2 py-1.5"}`,
-      unactive: `${isHomePage ? "ml-[-12px] " : ""}`,
+      unactive: `${isHomePage ? "ml-[-16px] " : ""}`,
     },
     {
       name: "Medicine",
       href: "/medicine",
       styles: "px-4 py-1.5 ml-[-16px]",
-      unactive: `${isStoresPage ? "ml-[-12px]" : "ml-[-6.5px]"}`,
+      unactive: `${isStoresPage ? "ml-[-14px]" : "ml-[-3.5px] !pt-[-52px]"}`,
     },
   ];
 
   return (
     <div
-      className={`container flex items-center justify-between  ${
+      className={`container flex items-center justify-between   ${
         isHomePage
           ? "absolute top-5 left-0 right-0"
           : "mt-[25px] md:mt-7 mb-[62px]"
@@ -75,7 +80,11 @@ export default function Header() {
         </p>
       </div>
       <div className="hidden xxl:block relative">
-        <Image src={headernav} alt="Decorative header image" />
+        <Image
+          src={headernav}
+          alt="Decorative header image"
+          className="pt-0.5"
+        />
         <nav>
           <ul className="flex absolute top-3 gap-11 pl-7.5">
             {navLinks.map((link) => {
@@ -87,7 +96,7 @@ export default function Header() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className={`text-sm rounded-3xl cursor-pointer ${
+                    className={`text-sm rounded-3xl  cursor-pointer ${
                       isActive
                         ? `text-[#F0F0F0] green ${link.styles}`
                         : `text-black ${link.unactive}`

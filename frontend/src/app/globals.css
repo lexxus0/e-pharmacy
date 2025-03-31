@@ -139,3 +139,10 @@ h2 {
     line-height: 115%;
   }
 }
+
+html,
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

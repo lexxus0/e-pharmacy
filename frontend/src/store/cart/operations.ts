@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { handleError, instance, setAuthHeader } from "../init";
 import { ICart } from "@/interfaces/interfaces";
 import { RootState } from "../store";
+import { AxiosError } from "axios";
 
 export const getCart = createAsyncThunk<ICart, void, { state: RootState }>(
   "cart/getCart",
@@ -14,6 +15,9 @@ export const getCart = createAsyncThunk<ICart, void, { state: RootState }>(
       const res = await instance.get("/cart");
       return res.data.data.data.items;
     } catch (e) {
+      if ((e as AxiosError).response?.status === 404) {
+        return [];
+      }
       return thunkAPI.rejectWithValue(handleError(e, "Failed to get cart"));
     }
   }

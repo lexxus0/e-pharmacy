@@ -1,6 +1,5 @@
 "use client";
 
-import Header from "@/components/layout/Header";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { Providers } from "@/store/provider";
@@ -10,6 +9,11 @@ import { refreshUser } from "@/store/auth/operations";
 import { useAppDispatch } from "@/store/stores/hooks";
 import type { Metadata } from "next";
 import { Toaster } from "sonner";
+import dynamic from "next/dynamic";
+
+const Header = dynamic(() => import("../components/layout/Header"), {
+  ssr: false,
+});
 
 const metadata: Metadata = {
   title: {
@@ -74,7 +78,7 @@ export default function RootLayout({
           <header>
             <Header />
           </header>
-          <main>{children}</main>
+          <main className="flex-grow">{children}</main>
           <footer>
             <Footer />
           </footer>

@@ -1,3 +1,5 @@
+"use client";
+
 import { selectUser } from "@/store/auth/selectors";
 import { selectCartItems } from "@/store/cart/selectors";
 import { useAppDispatch, useAppSelector } from "@/store/stores/hooks";
