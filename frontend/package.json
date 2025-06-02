@@ -11,6 +11,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.6.0",
     "axios": "^1.8.1",
+    "chat-widget-itzeyz": "^1.1.0",
     "formik": "^2.4.6",
     "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",
